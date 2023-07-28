@@ -1,0 +1,11 @@
+{
+    "name": "evalandgo/eag-wordpress",
+    "require": {
+        "firebase/php-jwt": "^6.8"
+    },
+    "autoload": {
+        "psr-4": {
+            "src\\": "src/"
+        }
+    }
+}
