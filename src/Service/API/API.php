@@ -6,12 +6,13 @@ use WP_Error;
 
 class API
 {
+    private const API_URL = 'https://beta.evalandgo.com/api/v2/domains';
     public function __construct(private string $api_key) {
     }
 
     public function getDomain(): WP_Error|array
     {
-        return wp_remote_get('https://beta.evalandgo.local/api/v2/domains?domainName='. parse_url(get_site_url(), PHP_URL_HOST), [
+        return wp_remote_get(self::API_URL. '?domainName='. parse_url(get_site_url(), PHP_URL_HOST), [
             'headers' => [
                 'Content-Type' => 'application/json; charset=utf-8',
                 'Authorization' => 'Bearer ' . $this->api_key,
@@ -33,7 +34,7 @@ class API
     }
     public function performUpdateDomain($id, string $public_key): array|WP_Error
     {
-        return wp_remote_post('https://beta.evalandgo.local/api/v2/domains/' . $id, [
+        return wp_remote_post(self::API_URL. '/' . $id, [
             'headers' => [
                 'Content-Type' => 'application/json; charset=utf-8',
                 'Authorization' => 'Bearer ' . $this->api_key
@@ -51,7 +52,7 @@ class API
 
     public function performCreateDomain(string $public_key): array|WP_Error
     {
-        return wp_remote_post('https://beta.evalandgo.local/api/v2/domains', [
+        return wp_remote_post(self::API_URL, [
             'headers' => [
                 'Content-Type' => 'application/json; charset=utf-8',
                 'Authorization' => 'Bearer ' . $this->api_key
