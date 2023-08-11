@@ -40,4 +40,9 @@ class SettingsView
         $value = get_option('eag_wordpress_settings') ? get_option('eag_wordpress_settings')['eag_host_private_key'] : '';
         echo '<textarea style="width: 400px;" id="eag_host_private_key" name="eag_wordpress_settings[eag_host_private_key]">'. $value.  '</textarea>';
     }
+
+    function display_last_error_message(string $error_message): void
+    {
+        echo "<div class='notice notice-error'><p>{$error_message}</p></div>";
+    }
 }

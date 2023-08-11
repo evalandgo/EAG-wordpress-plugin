@@ -26,6 +26,7 @@ function initialize_plugin(): void
     add_rewrite_rule('^eag/v1/auth$', 'index.php?eag_auth=1', 'top');
     add_filter('query_vars', [$authController, 'eag_add_query_vars']);
     add_action('template_redirect', [$authController, 'eag_check_route']);
+    add_shortcode('eag_user_token', [$authController, 'generate_token']);
 }
 
 function eag_activate(): void
