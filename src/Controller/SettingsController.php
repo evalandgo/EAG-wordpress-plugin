@@ -14,6 +14,19 @@ class SettingsController
         register_activation_hook(__FILE__, [$this, 'eag_activate']);
         register_deactivation_hook(__FILE__, [$this, 'eag_deactivate']);
         add_action('admin_init', [$this, 'register_settings']);
+        add_action('admin_notices', [$this, 'display_plugin_error_notice']);
+    }
+
+    function display_plugin_error_notice(): void
+    {
+        $error_message = get_option('eag-plugin_last_error', '');
+
+        if (!empty($error_message)) {
+            $this->settingsView->display_last_error_message($error_message);
+
+            //remove the notice
+            delete_option('eag-plugin_last_error');
+        }
     }
     public function eag_menu(): void
     {
@@ -28,10 +41,10 @@ class SettingsController
 
     public function register_settings(): void
     {
-        // register the settings
+        // registers the settings
         register_setting('eag_wordpress', 'eag_wordpress_settings', ['sanitize_callback' => [$this, 'eag_wordpress_settings_validate_and_sanitize']]);
 
-        // register the section and fields
+        // registers the sections and fields
         add_settings_section('eag_wordpress_section_api_key', 'Eval&GO API key', [$this->settingsView, 'eag_wordpress_section_api_key_callback'], 'eag_wordpress');
         add_settings_field('eag_api_key', 'API Key', [$this->settingsView, 'eag_api_key_field_callback'], 'eag_wordpress', 'eag_wordpress_section_api_key');
 
@@ -47,29 +60,20 @@ class SettingsController
         $errors = [];
 
         // Check the private key
-        if (!isset($input['eag_host_private_key']) || empty($input['eag_host_private_key'])) {
+        if (empty($input['eag_host_private_key'])) {
             $errors[] = 'Private Key is required.';
         }
         // Check the API key
-        if (!isset($input['eag_api_key']) || empty($input['eag_api_key'])) {
+        if (empty($input['eag_api_key'])) {
             $errors[] = 'API Key is required.';
         }
 
 
         if (!empty($errors)) {
-            global $wp_settings_errors;
-            foreach ($errors as $error) {
-                $wp_settings_errors[] = [
-                    'type' => 'error',
-                    'message' => $error,
-                    'setting' => 'eag_wordpress_settings',
-                    'code' => 'validation_failed'
-                ];
-            }
-            return get_option('eag_wordpress_settings');
+            return $this->handleErrors($errors);
         }
 
-        // If there are no errors, sanitize and return the input as usual
+        // If there are no errors, sanitize and return the API Key (not the private key to avoid any sanitization issues)
         $input['eag_api_key'] = sanitize_text_field($input['eag_api_key']);
 
         $api = new API($input['eag_api_key']);
@@ -77,19 +81,24 @@ class SettingsController
         $errors = $processor->handle_settings_update($errors, $input);
 
         if(!empty($errors)) {
-            global $wp_settings_errors;
-            foreach ($errors as $error) {
-                $wp_settings_errors[] = [
-                    'type' => 'error',
-                    'message' => $error,
-                    'setting' => 'eag_wordpress_settings',
-                    'code' => 'validation_failed'
-                ];
-            }
-            return get_option('eag_wordpress_settings');
+            return $this->handleErrors($errors);
         }
 
         return $input;
+    }
+
+    private function handleErrors($errors)
+    {
+        global $wp_settings_errors;
+        foreach ($errors as $error) {
+            $wp_settings_errors[] = [
+                'type' => 'error',
+                'message' => $error,
+                'setting' => 'eag_wordpress_settings',
+                'code' => 'validation_failed'
+            ];
+        }
+        return get_option('eag_wordpress_settings');
     }
 
 }
