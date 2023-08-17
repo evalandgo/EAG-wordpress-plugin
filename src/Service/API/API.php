@@ -6,7 +6,7 @@ use WP_Error;
 
 class API
 {
-    private const API_URL = 'https://beta.evalandgo.com/api/v2/domains';
+    private const API_URL = 'https://app.evalandgo.com/api/v2/domains';
     public function __construct(private string $api_key) {
     }
 
@@ -17,20 +17,8 @@ class API
                 'Content-Type' => 'application/json; charset=utf-8',
                 'Authorization' => 'Bearer ' . $this->api_key,
                 'Accept' => 'application/json',
-            ],
-            'sslverify' => false, //Todo: REMOVE THIS IN PRODUCTION
+            ]
         ]);
-//        if(is_array($response)) {
-//
-//        }
-//        if (is_wp_error($response) || wp_remote_retrieve_response_code($response) === 500) {
-//            $errors[] = 'There was an error in the API request. Please try again later.';
-//        } else {
-//            $response_code = wp_remote_retrieve_response_code($response);
-//            if ($response_code > 299) {
-//                $errors[] = 'Error: ' . $response_code . '. Please check your API key or contact support.';
-//            }
-//        }
     }
     public function performUpdateDomain($id, string $public_key): array|WP_Error
     {

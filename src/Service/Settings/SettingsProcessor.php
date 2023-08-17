@@ -39,8 +39,8 @@ class SettingsProcessor
             if ($response_code > 299) {
                 $errors[] = 'Error: ' . $response_code . '. Please check your API key or contact support.';
             } else {
-                //if the domain already exists, update it, otherwise create it
                 $response_body = json_decode(wp_remote_retrieve_body($response), true, 512, JSON_THROW_ON_ERROR);
+                //if the domain already exists, update it, otherwise create it
                 if (empty($response_body)) {
                     //create the domain
                     $response = $this->API->performCreateDomain($public_key);
