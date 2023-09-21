@@ -32,7 +32,7 @@ class SettingsView
 
     function eag_wordpress_section_host_keys_callback()
     {
-        echo '<p>Enter the private key that will be used to sign the data transmitted to Eval&GO. You can find more information about the encryption process <a href="https://www.evalandgo.com/en/online-survey-software/online-survey-security" target="_blank">here</a>.</p>';
+        echo '<p>Enter the private key that will be used to sign the data transmitted to Eval&GO.</p>';
     }
 
     function eag_private_key_field_callback()
