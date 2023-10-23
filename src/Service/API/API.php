@@ -17,7 +17,8 @@ class API
                 'Content-Type' => 'application/json; charset=utf-8',
                 'Authorization' => 'Bearer ' . $this->api_key,
                 'Accept' => 'application/json',
-            ]
+            ],
+//            'sslverify' => false,
         ]);
     }
     public function performUpdateDomain($id, string $public_key): array|WP_Error
@@ -34,7 +35,7 @@ class API
             ], JSON_THROW_ON_ERROR),
             'method' => 'PUT',
             'data_format' => 'body',
-            'sslverify' => false,
+//            'sslverify' => false,
         ]);
     }
 
@@ -53,7 +54,7 @@ class API
             ], JSON_THROW_ON_ERROR),
             'method' => 'POST',
             'data_format' => 'body',
-            'sslverify' => false,
+//            'sslverify' => false,
         ]);
     }
 }
