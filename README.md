@@ -29,7 +29,7 @@ After successful plugin configuration, you will find a new option labeled "Prote
 ### Protecting an Embedded Questionnaire
 To embed a questionnaire that's protected by user authentication, simply use the embed link provided on the "Publish" page of your Eval&GO questionnaire. The link should resemble the following format:
 ```html
-<iframe src="https://app.evalandgo.local/f/12345/4pDLc5HDEeMbHd8teGVaGn?s=987d984d82b025?[eag_user_token]" 
+<iframe src="https://app.evalandgo.com/f/12345/4pDLc5HDEeMbHd8teGVaGn?s=987d984d82b025?[eag_user_token]" 
         style="width:100%; height:100%;border:none" >
 </iframe>
 ```
