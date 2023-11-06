@@ -10,7 +10,7 @@ require __DIR__ . '/vendor/autoload.php';
  * Plugin Name: Eval&GO Wordpress
  * Plugin URI: https://www.evalandgo.com
  * Description: This plugin validates user authentication for users accessing a restricted form on Eval&GO.
- * Version: 1.0
+ * Version: 1.0.1
  * Author: Eval&GO
  * Author URI: https://www.evalandgo.com
  **/
