@@ -51,8 +51,9 @@ class SettingsController
         add_settings_section('eag_wordpress_section_host_keys', 'Encryption key', [$this->settingsView, 'eag_wordpress_section_host_keys_callback'], 'eag_wordpress');
         add_settings_field('eag_host_private_key', 'Your Private Key', [$this->settingsView, 'eag_private_key_field_callback'], 'eag_wordpress', 'eag_wordpress_section_host_keys');
 
-        add_settings_section('eag_wordpress_section_email', 'Connection between the form and your users', [$this->settingsView, 'eag_wordpress_section_email_callback'], 'eag_wordpress');
-        add_settings_field('eag_send_email', 'Connect users\' identities with their responses ?', [$this->settingsView, 'eag_send_email_field_callback'], 'eag_wordpress', 'eag_wordpress_section_email');
+        add_settings_section('eag_wordpress_section_connection', 'Connection between the form and your users', [$this->settingsView, 'eag_wordpress_section_connection_callback'], 'eag_wordpress');
+        add_settings_field('eag_send_email', 'Connect users\' email with their responses ?', [$this->settingsView, 'eag_send_email_field_callback'], 'eag_wordpress', 'eag_wordpress_section_connection');
+        add_settings_field('eag_send_identities', 'Connect users\' identities with their responses ?', [$this->settingsView, 'eag_send_identities_field_callback'], 'eag_wordpress', 'eag_wordpress_section_connection');
     }
 
     /**

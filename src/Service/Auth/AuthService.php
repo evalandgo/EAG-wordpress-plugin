@@ -72,6 +72,11 @@ class AuthService
             $data['m'] = $user->user_email;
         }
 
+        if(get_option('eag_wordpress_settings')['eag_send_identities'] === '1') {
+            $data['f'] = $user->first_name;
+            $data['l'] = $user->last_name;
+        }
+
         return $data;
     }
 }

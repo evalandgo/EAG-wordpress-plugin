@@ -46,10 +46,10 @@ class SettingsView
         echo "<div class='notice notice-error'><p>{$error_message}</p></div>";
     }
 
-    function eag_wordpress_section_email_callback()
+    function eag_wordpress_section_connection_callback()
     {
         echo '
-            <p>By default, this plugin does not send any identifiable user information to Eval&GO and thus keeps user responses anonymous. If you wish to link user responses with their respective identities, please enable the option below. <br> <small>When this option is enabled, the plugin will send the user\'s email address to Eval&GO and link it to the response. This will allow you to identify the user who submitted the response.</small></p>
+            <p>By default, this plugin does not send any identifiable user information to Eval&GO and thus keeps user responses anonymous. If you wish to link user responses with their respective identities, please enable the options below. <br> <small>When this option is enabled, the plugin will send the user\'s email address and/or their first and last name to Eval&GO and link it to the response. This will allow you to identify the user who submitted the response.</small></p>
             '
         ;
     }
@@ -58,5 +58,11 @@ class SettingsView
     {
         $value = get_option('eag_wordpress_settings') ? get_option('eag_wordpress_settings')['eag_send_email'] ?? '' : '';
         echo '<input type="checkbox" id="eag_send_email" name="eag_wordpress_settings[eag_send_email]" value="1" ' . checked(1, $value, false) . '/>';
+    }
+
+    function eag_send_identities_field_callback()
+    {
+        $value = get_option('eag_wordpress_settings') ? get_option('eag_wordpress_settings')['eag_send_identities'] ?? '' : '';
+        echo '<input type="checkbox" id="eag_send_identities" name="eag_wordpress_settings[eag_send_identities]" value="1" ' . checked(1, $value, false) . '/>';
     }
 }
