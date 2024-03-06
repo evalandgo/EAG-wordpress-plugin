@@ -49,7 +49,7 @@ class SettingsView
     function eag_wordpress_section_connection_callback()
     {
         echo '
-            <p>By default, this plugin does not send any identifiable user information to Eval&GO and thus keeps user responses anonymous. If you wish to link user responses with their respective identities, please enable the options below. <br> <small>When this option is enabled, the plugin will send the user\'s email address and/or their first and last name to Eval&GO and link it to the response. This will allow you to identify the user who submitted the response.</small></p>
+                <p>By default, this plugin does not send any identifiable user information to Eval&GO and thus keeps user responses anonymous. If you wish to link user responses with their respective identities, please enable the options below. <br> <small>When this option is enabled, the plugin will send the user\'s email address and/or their first and last name to Eval&GO and link it to the response. This will allow you to identify the user who submitted the response, as well as allow them to resume filling the survey on any browser as long as they are connected to your website.</small></p>
             '
         ;
     }
