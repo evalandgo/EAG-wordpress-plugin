@@ -6,7 +6,7 @@ use WP_Error;
 
 class API
 {
-    private const API_URL = 'https://app.evalandgo.com/api/v2/domains';
+    private const API_URL = 'https://app.evalandgo.com/api/v3/domains';
     public function __construct(private string $api_key) {
     }
 

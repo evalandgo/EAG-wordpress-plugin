@@ -23,16 +23,13 @@ class SettingsProcessor
 
         $response = $this->API->getDomain();
         if ($this->hasError($response)) {
-//            $this->logError($response);
-            $this->addError($errors, 'There was an error in the API request. Please try again later.');
-            return $errors;
+            return $this->addError($errors, 'There was an error in the API request. Please try again later.');
         }
 
         [$action, $updateResponse] = $this->createOrUpdateDomain($this->getResponseBody($response), $publicKey);
         if ($this->hasError($updateResponse)) {
 //            $this->logError($updateResponse);
-            $this->addError($errors, "Error when trying to $action the domain. Please check your API key or contact support.");
-            return $errors;
+            return $this->addError($errors, "Error when trying to $action the domain. Please check your API key or contact support.");
         }
 
         add_settings_error('eag_wordpress_settings', 'settings_updated', 'Settings saved successfully!', 'updated');

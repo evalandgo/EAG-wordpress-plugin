@@ -19,7 +19,6 @@ class AuthService
         if(!$redirect_uri || !self::plugin_configured()) {
             //throw an error on the admin page
             self::log_plugin_error(sprintf('An attempt to authenticate a user through the Eval&GO plugin was made, but the plugin was not configured. Redirect URI: %s. Please contact Eval&GO support.', $redirect_uri ?? 'null'));
-
             return wp_redirect(home_url());
         }
 
@@ -68,11 +67,11 @@ class AuthService
 
     private static function handleTokenData(array $data, WP_User $user): array
     {
-        if(get_option('eag_wordpress_settings')['eag_send_email'] === '1') {
+        if(get_option('eag_wordpress_settings')['eag_send_email'] == '1') {
             $data['m'] = $user->user_email;
         }
 
-        if(get_option('eag_wordpress_settings')['eag_send_identities'] === '1') {
+        if(get_option('eag_wordpress_settings')['eag_send_identities'] == '1') {
             $data['f'] = $user->first_name;
             $data['l'] = $user->last_name;
         }
